@@ -1,7 +1,4 @@
-reated on Mar 7, 2014
 
-@author: mbindal
-'''
 subnet_mapping={'web':'0000','ssh':'123'}
 network_id='66666'
 sec_id={'web':'3333','ssh':'6666'}
