@@ -96,13 +96,29 @@ security_groups_json={'security_group':[
                                  {"name":"ssh","description":"security group for ssh"},
                                  {"name":"database","description":"security group for database"}]}
 sec_group_rules={'ssh':{'security_group_rules': [
-                        {'direction': 'ingress','port-range-min': 80, 'port-range-max': 80,'protocol': 'TCP',
+                         {'direction': 'ingress','port-range-min': 22, 'port-range-max': 22,'protocol': 'TCP',
+                         'tenant_id': '111111',
+                         'security_group_id': '11111'}]
+                        }
+                        
+                 'web':{'security_group_rules': [
+                         {'direction': 'ingress','port-range-min': 80, 'port-range-max': 80,'protocol': 'TCP',
                          'tenant_id': '1222',
                          'security_group_id': '111111'},
-                        {'direction': 'ingress','port-range-min': 22, 'port-range-max': 22,'protocol': 'TCP',
-                         'tenant_id': '111111',
+                         {'direction': 'ingress','port-range-min': 22, 'port-range-max': 22,'protocol': 'TCP',
+                         'tenant_id': '1222',
+                         'remote-group-id': 'ssh',
+                         'security_group_id': '111111'}]
+                        }
+                         
+                 'database':{'security_group_rules': [
+                         {'direction': 'ingress','port-range-min': 3306, 'port-range-max': 3306,'protocol': 'TCP',
+                         'tenant_id': '1222',
                          'remote-group-id': 'web',
-                         'security_group_id': '11111'}]
-                        
+                         'security_group_id': '111111'},
+                         {'direction': 'ingress','port-range-min': 22, 'port-range-max': 22,'protocol': 'TCP',
+                         'tenant_id': '1222',
+                         'remote-group-id': 'ssh',
+                         'security_group_id': '111111'}]
                         }
                  }
