@@ -6,7 +6,13 @@ Created on Mar 7, 2014
 network_json={
  "network":
   {
-    "name": "my_network"
+    "name": "public"
+  }
+}
+network_json_private={
+ "network":
+  {
+    "name": "private"
   }
 }
 subnet_json={
@@ -25,6 +31,7 @@ subnet_json={
 }
 subnet_mapping={'web':'0000','ssh':'123'}
 network_id='66666'
+private_network_id='222222'
 sec_id={'web':'3333','ssh':'6666'}
 pool={"bulk_pool":[{
         "pool": {
