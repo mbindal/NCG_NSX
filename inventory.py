@@ -1,4 +1,28 @@
+'''
+Created on Mar 7, 2014
 
+@author: mbindal
+'''
+network_json={
+ "network":
+  {
+    "name": "my_network"
+  }
+}
+subnet_json={
+   "subnets":[
+      {"name":"web",
+         "cidr":"192.168.199.0/24",
+         "ip_version":4,
+         "network_id":"e6031bc2-901a-4c66-82da-f4c32ed89406"
+      },
+      {"name":"ssh",
+         "cidr":"10.56.4.0/22",
+         "ip_version":4,
+         "network_id":"64239a54-dcc4-4b39-920b-b37c2144effa"
+      }
+   ]
+}
 subnet_mapping={'web':'0000','ssh':'123'}
 network_id='66666'
 sec_id={'web':'3333','ssh':'6666'}
@@ -10,7 +34,7 @@ pool={"bulk_pool":[{
             "name": "webpool"
             }}]
                 }
-pool_member= {"webpool":[{
+pool_member= {"web":[{
         "member": {
             "protocol_port": "80",
             "address": '0.0.0.0',
@@ -60,3 +84,18 @@ update_sec_port={"security_groupl":[{
               ]   
            }}]
         }
+security_groups_json={'security_group':[
+                                 {"name":"web","description":"security group for webservers"},
+                                 {"name":"ssh","description":"security group for ssh"},
+                                 {"name":"database","description":"security group for database"}]}
+sec_group_rules={'ssh':{'security_group_rules': [
+                        {'direction': 'ingress','port-range-min': 80, 'port-range-max': 80,'protocol': 'TCP',
+                         'tenant_id': '1222',
+                         'security_group_id': '111111'},
+                        {'direction': 'ingress','port-range-min': 22, 'port-range-max': 22,'protocol': 'TCP',
+                         'tenant_id': '111111',
+                         'remote-group-id': 'web',
+                         'security_group_id': '11111'}]
+                        
+                        }
+                 }
