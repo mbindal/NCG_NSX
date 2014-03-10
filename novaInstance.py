@@ -1,7 +1,6 @@
 import os
 import time
 import novaclient.v1_1.client as nvclient
-from credentials import get_nova_creds
 
 SUCCESS = 0
 FAIL = 1
@@ -9,23 +8,20 @@ FAIL = 1
 class novaInstance:
     #class to create servers using nova 
     
-    def __init__(self):
+    def __init__(self,nova):
         self.name = None
         self.image = None
         self.flavor = None
-        creds = get_nova_creds()
-        self.nova = nvclient.Client(**creds)
+        self.nova = nova
             
-    def __init__(self, name, image, flavor, create=False):
+    def __init__(self, name, image, flavor, create=False,nova):
         self.name = name
         self.image = image
         self.flavor = flavor
-        
-        creds = get_nova_creds()
-        self.nova = nvclient.Client(**creds)
+        self.nova = nova
         
         if create:
-            self.create_instance()
+            self.nova.create_instance()
     
     def create_instance(self):
         if !(self.name or self.image or self.flavor):
@@ -49,16 +45,15 @@ class novaInstance:
         return SUCCESS
         
 
-    def set_params(self, name, image, flavor):
+    def set_params(self, name, image, flavor,nova):
         if name:
             self.name = name
         if image:
             self.image = image
         if flavor:
             self.flavor = flavor
+        if nova:
+            self.nova = nova    
             
     def show_all_instances(self):
         print nova.servers.list(detailed=True)
-
-
-
