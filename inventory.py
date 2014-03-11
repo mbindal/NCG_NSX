@@ -68,7 +68,7 @@ monitor_pool_assoc={"associations":[{
             "id": "000"
             }}]
           }
-vips={"vip_list":[{
+vip={"vip_list":[{
         "vip": {
             "protocol": "HTTP",
             "name": "NewVip",
