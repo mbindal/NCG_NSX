@@ -44,13 +44,13 @@ pool={"bulk_pool":[{
 pool_member= {"web":[{
         "member": {
             "protocol_port": "80",
-            "address": '0.0.0.0',
+            "address": 'web1',
             "pool_id": '0000'
         }}],
               "ssh":[{
         "member": {
             "protocol_port": "80",
-            "address": '0.0.0.0',
+            "address": 'ssh1',
             "pool_id": '0000'
         }}]
            }
@@ -68,7 +68,7 @@ monitor_pool_assoc={"associations":[{
             "id": "000"
             }}]
           }
-lb_vips={"vip_list":[{
+vips={"vip_list":[{
         "vip": {
             "protocol": "HTTP",
             "name": "NewVip",
