@@ -18,7 +18,7 @@ def create_topology():
     security_grp_object=sec_groups(quantum)
     security_grp_object.Create_securitygroup()
     security_grp_object.Create_securitygroupules()
-    load_balancer=Load_Balancer_floating_ip(mysets.network_id,mysets.subnet_mapping,mysets.sec_id,quantum);
+    load_balancer=Load_Balancer_floating_ip(mysets.network_id,mysets.subnet_mapping, mysets.ip_mapping, mysets.sec_id,quantum);
     load_balancer.Create_Loadbalancers()
     
     
