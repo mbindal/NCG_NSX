@@ -3,17 +3,18 @@ Created on Mar 7, 2014
 
 @author: mbindal
 '''
-network_json_private={
-   "networks":[
-      {
-         "name":"sample_network_1"
-      },
-      {
-         "name":"sample_network_2"
-      }
-   ]
+network_json={
+ "network":
+  {
+    "name": "public"
+  }
 }
-router_id='1111111'
+network_json_private={
+ "network":
+  {
+    "name": "private"
+  }
+}
 subnet_json={
    "subnets":[
       {"name":"web",
@@ -28,10 +29,10 @@ subnet_json={
       }
    ]
 }
-subnet_mapping={'web':'0000','ssh':'123'}
+subnet_mapping={'web':'0000','ssh':'123','database':'234'}
 network_id='66666'
 private_network_id='222222'
-sec_id={'web':'3333','ssh':'6666'}
+sec_id={'web':'3333','ssh':'6666','database':'9999'}
 pool={"bulk_pool":[{
         "pool": {
             "subnet_id": "web",
@@ -44,17 +45,19 @@ pool_member= {"web":[{
         "member": {
             "protocol_port": "80",
             "address": 'web1',
-            "pool_id": '0000'
-        }}],
-              "ssh":[{
-        "member": {
+            "pool_id": '0000'},
+          {
             "protocol_port": "80",
-            "address": 'ssh1',
-            "pool_id": '0000'
-        }}]
+            "address": 'web2',
+            "pool_id": '0000'},
+          {
+            "protocol_port": "80",
+            "address": 'web3',
+            "pool_id": '0000'}
+        }]
            }
            
-ip_mapping={web1:0.0.0.0, web2:0.0.0.0}
+ip_mapping={web1:0.0.0.0, web2:0.0.0.0, web3:0.0.0.0, jumpbox:0.0.0.0, db1:0.0.0.0}
 
 health_monitors={
                  "monitors":[{
