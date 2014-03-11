@@ -54,6 +54,9 @@ pool_member= {"web":[{
             "pool_id": '0000'
         }}]
            }
+           
+ip_mapping={web1:0.0.0.0, web2:0.0.0.0}
+
 health_monitors={
                  "monitors":[{
         "health_monitor": {
