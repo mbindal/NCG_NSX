@@ -2,7 +2,7 @@ import inventory as mysets
 from neutronclient.v2_0 import client
 import novaclient.v1_1.client as nvclient
 from credentials import get_keystone_creds,get_nova_creds
-from sec_groups import sec_groups
+from security_groups import security_groups
 from network_subnet import network_subnet
 from Load_Balancer_floating_ip import  Load_Balancer_floating_ip
 
@@ -16,8 +16,8 @@ def create_topology():
     network_object.Create_subnet()
     #enter the nova code to boot instances
     security_grp_object=sec_groups(quantum)
-    security_grp_object.Create_securitygroup()
-    security_grp_object.Create_securitygroupules()
+    security_grp_object.create_security_group()
+    security_grp_object.create_security_group_rule()
     load_balancer=Load_Balancer_floating_ip(mysets.network_id,mysets.subnet_mapping, mysets.ip_mapping, mysets.sec_id,quantum);
     load_balancer.Create_Loadbalancers()
     
