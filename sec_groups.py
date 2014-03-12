@@ -18,8 +18,8 @@ class security_groups(object):
             if security_group['name'] in config.security_group_rules.keys():
             	print ("Creating rules for tenant:  %s group: %s" % (security_group['tenant_id'], security_group['name']))
 		for rule in config.security_group_rules[security_group['name']]:
-            if 'remote_group_id' in rule['security_group_rule'].keys():
-			    rmt_grp_id = config.security_group_ids[rule['security_group_rule']['remote_group_id']]
-                rule['security_group_rule']['remote_group_id'] = rmt_grp_id
-            rule['security_group_rule']['security_group_id'] = security_group['id']
-            self.neutron.create_security_group_rule(rule)
+                    if 'remote_group_id' in rule['security_group_rule'].keys():
+		        rmt_grp_id = config.security_group_ids[rule['security_group_rule']['remote_group_id']]
+                        rule['security_group_rule']['remote_group_id'] = rmt_grp_id
+            	    rule['security_group_rule']['security_group_id'] = security_group['id']
+            	    self.neutron.create_security_group_rule(rule)
