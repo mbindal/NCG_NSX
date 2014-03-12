@@ -1,19 +1,25 @@
-import inventory as mysets
-class sec_groups(object):
-    def __init__(self,quantum):
-            self.i=self.j=0;
-            self.quantum=quantum
-    #creation of pools and pool members
-    def Create_securitygroup(self):
-        sec_group_list=self.quantum.create_security_group(mysets.security_groups_json)['security_group'];
-        for groups in sec_group_list:
-            mysets.sec_id[groups['name']]=groups['id']
-    def Create_securitygroupules(self):
-        security_groups = self.quantum.list_security_groups()['security_groups']
-        for security_group in security_groups:
-            print ("Creating rules for tenant:  %s group: %s" %
-                    (security_group['tenant_id'], security_group['name']))
-            for rules in mysets.sec_group_rules[security_group['name']]['security_group_rules']:
-                rules['tenant_id']=security_group['tenant_id']
-                rules['security_group_id']=security_group['id']
-            self.quantum.create_security_group_rule(mysets.sec_group_rules[security_group['name']])
+import inventory as config
+
+class security_groups(object):
+    def __init__(self, neutron):
+        self.neutron = neutron
+        
+    def create_security_groups(self):
+        for security_group in config.security_groups['security_groups']:
+            self.neutron.create_security_group(security_group);
+        security_group_list = self.neutron.list_security_groups()['security_groups'];
+        for security_group in security_group_list:
+            if security_group['name'] in config.security_group_ids.keys():
+                config.security_group_ids[security_group['name']] = security_group['id']
+
+    def create_security_group_rule(self):
+        security_group_list = self.neutron.list_security_groups()['security_groups'];
+        for security_group in security_group_list:
+            if security_group['name'] in config.security_group_rules.keys():
+            	print ("Creating rules for tenant:  %s group: %s" % (security_group['tenant_id'], security_group['name']))
+		for rule in config.security_group_rules[security_group['name']]:
+            if 'remote_group_id' in rule['security_group_rule'].keys():
+			    rmt_grp_id = config.security_group_ids[rule['security_group_rule']['remote_group_id']]
+                rule['security_group_rule']['remote_group_id'] = rmt_grp_id
+            rule['security_group_rule']['security_group_id'] = security_group['id']
+            self.neutron.create_security_group_rule(rule)
