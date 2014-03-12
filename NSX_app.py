@@ -2,7 +2,7 @@ import inventory as mysets
 from neutronclient.v2_0 import client
 import novaclient.v1_1.client as nvclient
 from credentials import get_keystone_creds,get_nova_creds
-from security_groups import security_groups
+from sec_groups import security_groups
 from network_subnet import network_subnet
 from Load_Balancer_floating_ip import  Load_Balancer_floating_ip
 
