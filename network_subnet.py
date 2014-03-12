@@ -5,7 +5,9 @@ class network_subnet(object):
             self.quantum=quantum
     #creation of pools and pool members
     def Create_network(self):
-        mysets.network_id=self.quantum.list_networks()['networks'][0]['id']
+        for ind_networks in self.quantum.list_networks()['networks']:
+            if ind_networks['name']=='public':
+                 mysets.network_id=ind_networks['id']
         mysets.private_network_id=self.quantum.create_network(mysets.network_json_private)['networks']
         mysets.router_id=self.quantum.list_routers()['routers'][0]['id']
     def Create_subnet(self):
