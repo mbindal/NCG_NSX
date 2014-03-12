@@ -12,7 +12,7 @@ class network_subnet(object):
         i=0;
         for subnets in mysets.subnet_json['subnets']:
             subnets['network_id']=mysets.private_network_id[i]['id']
-            ++i
+            i=i + 1
         subnet_list=self.quantum.create_subnet(mysets.subnet_json)['subnets']
         for ind_subnets in subnet_list:
             mysets.subnet_mapping[ind_subnets['name']]=ind_subnets['id']

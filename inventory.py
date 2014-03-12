@@ -3,18 +3,17 @@ Created on Mar 7, 2014
 
 @author: mbindal
 '''
-network_json={
- "network":
-  {
-    "name": "public"
-  }
-}
 network_json_private={
- "network":
-  {
-    "name": "private"
-  }
+   "networks":[
+      {
+         "name":"sample_network_1"
+      },
+      {
+         "name":"sample_network_2"
+      }
+   ]
 }
+router_id='1111111'
 subnet_json={
    "subnets":[
       {"name":"web",

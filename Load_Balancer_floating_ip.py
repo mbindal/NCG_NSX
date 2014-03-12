@@ -36,7 +36,7 @@ class Load_Balancer_floating_ip(object):
             for sec_grp in mysets.update_sec_port['security_groupl'][self.i]['port']['security_groups']:
                 mysets.update_sec_port['security_groupl'][self.i]['port']['security_groups'][self.j]=self.sec_id[sec_grp]
             self.quantum.update_port(vip_portid,mysets.update_sec_port['security_groupl'][self.i]);
-            ++self.i;
+            self.i=self.i + 1;
     
     def Create_Floatingip(self,port_id):
         mysets.floating_ip['floating_ip']['port_id']=port_id
