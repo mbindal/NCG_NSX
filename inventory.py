@@ -126,3 +126,24 @@ sec_group_rules={'ssh':{'security_group_rules': [
                          'security_group_id': '111111'}]
                         }
                  }
+
+servers = [{'name' : 'Web1',
+            'image' : 'cirros-0.3.1-x86_64-uec',
+            'flavor' : 'm1.tiny'
+           },
+           {'name' : 'Web2',
+            'image' : 'cirros-0.3.1-x86_64-uec',
+            'flavor' : 'm1.tiny'
+           },
+           {'name' : 'Web3',
+            'image' : 'cirros-0.3.1-x86_64-uec',
+            'flavor' : 'm1.tiny'
+           },
+           {'name' : 'JumpBox',
+            'image' : 'cirros-0.3.1-x86_64-uec',
+            'flavor' : 'm1.tiny'
+           },
+           {'name' : 'DB1',
+            'image' : 'cirros-0.3.1-x86_64-uec',
+            'flavor' : 'm1.tiny'
+           }]
