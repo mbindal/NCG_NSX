@@ -31,7 +31,6 @@ subnet_json={
 subnet_mapping={'web':'0000','ssh':'123','database':'234'}
 network_id='66666'
 private_network_id='222222'
-sec_id={'web':'3333','ssh':'6666','database':'9999'}
 pool={"bulk_pool":[{
         "pool": {
             "subnet_id": "web",
@@ -95,37 +94,6 @@ update_sec_port={"security_groupl":[{
               ]   
            }}]
         }
-security_groups_json={'security_group':[
-                                 {"name":"web","description":"security group for webservers"},
-                                 {"name":"ssh","description":"security group for ssh"},
-                                 {"name":"database","description":"security group for database"}]}
-sec_group_rules={'ssh':{'security_group_rules': [
-                         {'direction': 'ingress','port-range-min': 22, 'port-range-max': 22,'protocol': 'TCP',
-                         'tenant_id': '111111',
-                         'security_group_id': '11111'}]
-                        }
-                        
-                 'web':{'security_group_rules': [
-                         {'direction': 'ingress','port-range-min': 80, 'port-range-max': 80,'protocol': 'TCP',
-                         'tenant_id': '1222',
-                         'security_group_id': '111111'},
-                         {'direction': 'ingress','port-range-min': 22, 'port-range-max': 22,'protocol': 'TCP',
-                         'tenant_id': '1222',
-                         'remote-group-id': 'ssh',
-                         'security_group_id': '111111'}]
-                        }
-                         
-                 'database':{'security_group_rules': [
-                         {'direction': 'ingress','port-range-min': 3306, 'port-range-max': 3306,'protocol': 'TCP',
-                         'tenant_id': '1222',
-                         'remote-group-id': 'web',
-                         'security_group_id': '111111'},
-                         {'direction': 'ingress','port-range-min': 22, 'port-range-max': 22,'protocol': 'TCP',
-                         'tenant_id': '1222',
-                         'remote-group-id': 'ssh',
-                         'security_group_id': '111111'}]
-                        }
-                 }
 
 servers = [{'name' : 'Web1',
             'image' : 'cirros-0.3.1-x86_64-uec',
@@ -147,3 +115,84 @@ servers = [{'name' : 'Web1',
             'image' : 'cirros-0.3.1-x86_64-uec',
             'flavor' : 'm1.tiny'
            }]
+
+security_groups={
+   'security_groups':
+   [
+      {'security_group':{"name":"web1", "description":"security group for webservers"}},
+      {'security_group':{"name":"ssh1", "description":"security group for ssh"}},
+      {'security_group':{"name":"db1", "description":"security group for database"}}            
+   ]
+}
+
+security_group_ids={'web1':'','ssh1':'','db1':''}
+
+security_group_rules={  
+   'ssh1':
+   [
+      {
+         'security_group_rule':
+         {
+            'direction': 'ingress', 
+            'port_range_min': 22, 
+            'port_range_max': 22, 
+            'ethertype':'IPv4', 
+            'protocol': 'TCP',
+            'security_group_id': 'ssh1'
+         }
+      }
+   ],
+   'web1':
+   [
+      {
+         'security_group_rule':
+         {
+            'direction': 'ingress', 
+            'port_range_min': 80, 
+            'port_range_max': 80,
+            'ethertype':'IPv4', 
+            'protocol': 'TCP',
+            'security_group_id': 'web1'
+         }
+      },
+      {
+         'security_group_rule':
+         {
+            'direction': 'ingress',
+            'port_range_min': 22, 
+            'port_range_max': 22,
+            'ethertype':'IPv4', 
+            'protocol': 'TCP',
+            'remote_group_id': 'ssh1', 
+            'security_group_id': 'web1'
+         },
+      }
+   ],
+   'db1':
+   [
+      {
+         'security_group_rule':
+         {
+            'direction': 'ingress',
+            'port_range_min': 3306, 
+            'port_range_max': 3306,
+            'ethertype':'IPv4', 
+            'protocol': 'TCP',
+            'remote_group_id': 'web1', 
+            'security_group_id': 'db1'
+         }
+      },
+      {
+         'security_group_rule':
+         {
+            'direction': 'ingress',
+            'port_range_min': 22, 
+            'port_range_max': 22,
+            'ethertype':'IPv4', 
+            'protocol': 'TCP',
+            'remote_group_id': 'ssh1', 
+            'security_group_id': 'db1'
+         }
+      }
+   ]
+}
