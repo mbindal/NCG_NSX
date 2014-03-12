@@ -119,16 +119,16 @@ servers = [{'name' : 'Web1',
 security_groups={
    'security_groups':
    [
-      {'security_group':{"name":"web1", "description":"security group for webservers"}},
-      {'security_group':{"name":"ssh1", "description":"security group for ssh"}},
-      {'security_group':{"name":"db1", "description":"security group for database"}}            
+      {'security_group':{"name":"web", "description":"security group for webservers"}},
+      {'security_group':{"name":"ssh", "description":"security group for ssh"}},
+      {'security_group':{"name":"db", "description":"security group for database"}}            
    ]
 }
 
-security_group_ids={'web1':'','ssh1':'','db1':''}
+security_group_ids={'web':'','ssh':'','db':''}
 
 security_group_rules={  
-   'ssh1':
+   'ssh':
    [
       {
          'security_group_rule':
@@ -138,11 +138,11 @@ security_group_rules={
             'port_range_max': 22, 
             'ethertype':'IPv4', 
             'protocol': 'TCP',
-            'security_group_id': 'ssh1'
+            'security_group_id': 'ssh'
          }
       }
    ],
-   'web1':
+   'web':
    [
       {
          'security_group_rule':
@@ -152,7 +152,7 @@ security_group_rules={
             'port_range_max': 80,
             'ethertype':'IPv4', 
             'protocol': 'TCP',
-            'security_group_id': 'web1'
+            'security_group_id': 'web'
          }
       },
       {
@@ -163,12 +163,12 @@ security_group_rules={
             'port_range_max': 22,
             'ethertype':'IPv4', 
             'protocol': 'TCP',
-            'remote_group_id': 'ssh1', 
-            'security_group_id': 'web1'
+            'remote_group_id': 'ssh', 
+            'security_group_id': 'web'
          },
       }
    ],
-   'db1':
+   'db':
    [
       {
          'security_group_rule':
@@ -178,8 +178,8 @@ security_group_rules={
             'port_range_max': 3306,
             'ethertype':'IPv4', 
             'protocol': 'TCP',
-            'remote_group_id': 'web1', 
-            'security_group_id': 'db1'
+            'remote_group_id': 'web', 
+            'security_group_id': 'db'
          }
       },
       {
@@ -190,8 +190,8 @@ security_group_rules={
             'port_range_max': 22,
             'ethertype':'IPv4', 
             'protocol': 'TCP',
-            'remote_group_id': 'ssh1', 
-            'security_group_id': 'db1'
+            'remote_group_id': 'ssh', 
+            'security_group_id': 'db'
          }
       }
    ]
