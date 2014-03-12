@@ -15,9 +15,9 @@ def create_topology():
     network_object.Create_network()
     network_object.Create_subnet()
     #enter the nova code to boot instances
-    security_grp_object=sec_groups(quantum)
-    security_grp_object.create_security_group()
-    security_grp_object.create_security_group_rule()
+    security_grp_object=security_groups(quantum)
+    security_grp_object.create_security_groups()
+    security_grp_object.create_security_group_rules()
     load_balancer=Load_Balancer_floating_ip(mysets.network_id,mysets.subnet_mapping, mysets.ip_mapping, mysets.sec_id,quantum);
     load_balancer.Create_Loadbalancers()
     
